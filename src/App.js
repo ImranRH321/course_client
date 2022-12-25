@@ -5,6 +5,7 @@ import Home from './Pages/Home/Home/Home';
 import Login from './Pages/Login_impormation/Login/Login';
 import Register from './Pages/Login_impormation/Register/Register';
 import NotFound from './Pages/NotFound/NotFound';
+import Footer from './Pages/Sheard/Footer/Footer';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer></Footer>
     </div>
   );
 };
