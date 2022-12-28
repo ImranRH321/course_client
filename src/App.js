@@ -1,5 +1,9 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import AddProducts from './Pages/Dashboard/AddProducts/AddProducts';
+import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
+import ManageOrder from './Pages/Dashboard/ManageOrder/ManageOrder';
+import Order from './Pages/Dashboard/Order/Order';
 import About from './Pages/Home/About/About';
 import Header from './Pages/Home/Header/Header';
 import Home from './Pages/Home/Home/Home';
@@ -21,11 +25,17 @@ const App = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:productId" element={<ProductDetails />} />
         <Route path="/productDetails/productOrderForm" element={<ProductOrderForm />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="order" element={<Order />} />
+          <Route path="manageOrder" element={<ManageOrder/>} />
+          <Route path="addProduct" element={<AddProducts/>} />
+        </Route>
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </div>
   );
 };

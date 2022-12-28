@@ -11,11 +11,12 @@ const ProductOrderForm = () => {
     }
 
     return (
-        <div className='md:h-96 bg-red-400'>
+        <div className=' bg-red-400 '>
             <h2 className='text-3xl text-white font-bold py-4'>Order From Details ! </h2>
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="grid lg:grid-cols-3 lg:mt-5 md:grid-cols-2 gap-4 justify-center md:p-4"
+                // className="grid lg:grid-cols-3 lg:mt-5 md:grid-cols-2 gap-4 justify-center md:p-4"
+                className="grid grid-cols-1  justify-center gap-5 text-center"
             >
                 <input
                     class="input input-bordered w-full max-w-xs font-bold text-1xl"
@@ -48,7 +49,6 @@ const ProductOrderForm = () => {
                     {...register("address")}
                     required
                 />
-                <div>
                     <input
                         class="input input-bordered w-full max-w-xs"
                         placeholder="Phone Number.."
@@ -56,12 +56,11 @@ const ProductOrderForm = () => {
                         {...register("phone")}
                         required
                     />
-                    <input
+                <input
                         type="submit"
                         value="bookFrom"
                         class='input my-5 btn-warning text-dark font-bold text-2xl input-bordered max-w-xs w-full'
                     />
-                </div>
             </form>
         </div>
     );
