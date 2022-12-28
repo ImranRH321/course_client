@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
     const navbar = <>
-        <li><Link to="/home">Home</Link></li>
+        <li><Link to="/">Home</Link></li>
         <li><Link to="/about">About</Link></li>
-        <li><Link to="/services">Servies</Link></li>
-        <li><Link to="/services">Blogs</Link></li>
+        <li><Link to="/products">Products</Link></li>
+        <li><Link to="/about">About</Link></li>
     </>
     return (
         <div className="navbar bg-base-100 shadow">
