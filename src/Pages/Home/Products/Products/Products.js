@@ -7,24 +7,27 @@ const Products = () => {
   const [search, setSearch] = useState("");
   const [value, setValue] = useState("");
 
+
   useEffect(() => {
     fetch("products.json")
       .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, []);
+      .then((data ) => setProducts( data.filter((items) => {
+        if(value === "All") return items  
+        return items.brand === value
+      })));
+  }, [value]);
 
-  //  const selectProduct = products.filter(ele => ele.category === value)
 
-  //  if(selectProduct){
-  //         console.log(selectProduct);
-  //  }
-
-  products.filter((pd) => console.log(pd.category));
 
   return (
     <div className="md:flex gap-10">
       <div className="Search_area basis-1/3">
-        <Filtering setSearch={setSearch} setValue={setValue}></Filtering>
+        {value}
+        <Filtering
+          setSearch={setSearch}
+          setValue={setValue}
+          products={products}
+        ></Filtering>
       </div>
       <div className="product_area grid md:grid-cols-2 lg:grid-cols-3 gap-5">
         {products

@@ -17,10 +17,10 @@ const Login = () => {
 
 
     return (
-        <div className="flex sm:h-96 mt-20 justify-center items-center hero lg:min-h-screen bg-base-200">
-            <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="flex py-20  mt-20 justify-center items-center hero bg-blue-400">
+            <div className="card w-96 bg-blue-400 text-white shadow-xl border-red-400 hover:bg-gree-400 ">
                 <div className="card-body">
-                    <h2 className="text-center text-2xl font-bold text-black text-5xl font-bold">Login</h2>
+                    <h2 className="text-center text-5xl font-bold text-warning font-[propine] font-bold text-5xl font-bold">Login</h2>
 
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-control w-full max-w-xs">
@@ -98,7 +98,7 @@ const Login = () => {
                         </div>
                         {/* {setError} */}
                         <input
-                            className="btn w-full max-w-xs btn-dark capitalize text-white hover:btn-success"
+                            className="rounded py-2 cursor-pointer shadow mt-2 w-full text-2xl max-w-xs bg-blue-600 hover:bg-blue-700 capitalize text-white"
                             type="submit"
                             value="Login"
                         />

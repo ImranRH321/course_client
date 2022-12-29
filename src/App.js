@@ -35,7 +35,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </div>
   );
 };

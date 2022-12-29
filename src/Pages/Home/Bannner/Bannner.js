@@ -44,12 +44,22 @@ const Bannner = () => {
 
   return (
     <div>
-      <img
-        className="w-full h-[500px]"
-        id="slider_img"
-        src="https://i.ibb.co/k33Q152/23.jpg"
-        alt=""
-      />
+      <div className=" ">
+        <img
+          className="w-full h-[500px] relative"
+          id="slider_img"
+          src="https://i.ibb.co/k33Q152/23.jpg"
+          alt=""
+        />
+      </div>
+      <div className="absolute   bg-red-300 w-[400px] h-[200px] mx-auto top-0 left-0 bottom-0  border">
+        <div>
+          <h2 className="text-3xl text-primary font-bold fongo-[propine]">
+            this is new products{" "}
+          </h2>
+          <button className="btn btn-primary btn-sm">All product </button>
+        </div>
+      </div>
     </div>
   );
 };
