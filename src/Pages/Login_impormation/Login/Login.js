@@ -18,7 +18,7 @@ const Login = () => {
 
     return (
         <div className="flex py-20  mt-20 justify-center items-center hero bg-blue-400">
-            <div className="card w-96 bg-blue-400 text-white shadow-xl border-red-400 hover:bg-gree-400 ">
+            <div className="card w-96 bg-blue-400 text-white shadow-xl border-red-400 hover:bg-blue-500 ">
                 <div className="card-body">
                     <h2 className="text-center text-5xl font-bold text-warning font-[propine] font-bold text-5xl font-bold">Login</h2>
 

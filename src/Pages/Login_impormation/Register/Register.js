@@ -15,10 +15,10 @@ const Register = () => {
   };
 
   return (
-    <div className="flex sm:h-96 mt-20 justify-center items-center hero lg:min-h-screen bg-base-200">
-      <div className="card w-96 bg-base-100 shadow-xl">
+    <div className="flex py-20  mt-20 justify-center items-center hero bg-green-500">
+      <div className="card w-96 bg-green-500 text-white shadow-xl border-red-400 hover:bg-green-400 ">
         <div className="card-body">
-          <h2 className="text-center text-2xl font-bold text-black text-5xl font-bold">
+          <h2 className="text-center text-2xl font-bold text-black text-5xl font-bold text-4xl">
             Register
           </h2>
 
@@ -148,7 +148,7 @@ const Register = () => {
             </div>
             {/* {setError} */}
             <input
-              className="btn w-full max-w-xs btn-dark capitalize text-white hover:btn-info"
+              className="btn btn-primary w-full max-w-xs btn-dark capitalize text-white "
               type="submit"
               value="Register"
             />
