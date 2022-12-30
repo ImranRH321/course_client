@@ -1,18 +1,60 @@
+import { async } from "@firebase/util";
 import React from "react";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import auth from "../../../firebase/firebase.init";
+import Loading from "../../Sheard/Footer/Loading";
 
 const Register = () => {
+  // google
+  const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+  //  email password flied
+  const [createUserWithEmailAndPassword, cuser, cloading, cerror] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  // update frofile
+  const [updateProfile, updating, error] = useUpdateProfile(auth);
+
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors }, 
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    //  em / pw
+    createUserWithEmailAndPassword(data.email, data.password);
+    // up df
+    const success = await updateProfile({ displayName: data.name });
+    if (success) {
+      alert("Updated profile");
+    }
   };
+
+  if (cloading || gloading) {
+    return <Loading></Loading>;
+  }
+
+  let googleError;
+
+  if (gerror || cerror) {
+    googleError = (
+      <p className="text-red-700 font-[propine]">
+        {gerror?.message || cerror?.message}
+      </p>
+    );
+  }
+
+  if (cuser || guser) {
+    console.log(cuser || guser);
+  }
 
   return (
     <div className="flex py-20  mt-20 justify-center items-center hero bg-green-500">
@@ -46,31 +88,7 @@ const Register = () => {
                 )}
               </label>
             </div>
-            {/*  */}
-            {/* <div className="form-control w-full max-w-xs">
-                            <label className="label">
-                                <span className="label-text">Phone</span>
-                            </label>
-                            <input
-                                type="number"
-                                placeholder="Your Name"
-                                className="input input-bordered w-full max-w-xs text-black"
-                                {...register("phone", {
-                                    required: {
-                                        value: true,
-                                        message: "Phone is Required",
-                                    }
-                                })}
-                            />
-                            <label className="label">
-                                {errors.phone?.type === "required" && (
-                                    <span className="label-text-alt text-red-500">
-                                        {errors.phone.message}
-                                    </span>
-                                )}
-                            </label>
-                        </div> */}
-            {/*  */}
+
             <div className="form-control w-full max-w-xs">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -146,7 +164,7 @@ const Register = () => {
                 )}
               </label>
             </div>
-            {/* {setError} */}
+            {googleError}
             <input
               className="btn btn-primary w-full max-w-xs btn-dark capitalize text-white "
               type="submit"
@@ -162,6 +180,13 @@ const Register = () => {
               Login
             </Link>
           </p>
+          <div className="divider">OR</div>
+          <button
+            onClick={() => signInWithGoogle()}
+            class="btn btn-warning mx-auto  text-2xl"
+          >
+            Google
+          </button>
         </div>
       </div>
     </div>

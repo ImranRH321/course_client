@@ -38,7 +38,6 @@ const Bannner = () => {
       const imgAll = images[imgIndex];
       imgElement.setAttribute("src", imgAll);
       imgIndex++;
-      console.log(imgIndex, imgAll);
     }, 5000);
   }, [imgIndex]);
 
