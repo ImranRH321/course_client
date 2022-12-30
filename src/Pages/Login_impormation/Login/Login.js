@@ -1,22 +1,20 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase/firebase.init";
-import {  useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import {
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
+import Loading from "../../Sheard/Footer/Loading";
 
 const Login = () => {
-  // google 
+  // google
   const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
-// login email vs password 
-const [
-  signInWithEmailAndPassword,
-  euser,
-  eloading,
-  eerror,
-] = useSignInWithEmailAndPassword(auth);
-
- 
-
+  // login email vs password
+  const [signInWithEmailAndPassword, euser, eloading, eerror] =
+    useSignInWithEmailAndPassword(auth);
+  // hook form data
   const {
     register,
     handleSubmit,
@@ -24,21 +22,23 @@ const [
     formState: { errors },
   } = useForm();
 
+  //  pribate route
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+  // hook form submit
   const onSubmit = (data) => {
-    signInWithEmailAndPassword(data.email, data.password)
+    signInWithEmailAndPassword(data.email, data.password);
     console.log(data);
   };
 
-  if( eloading || gloading){
-    return <h1>loading.....</h1>
-  }
-  
-
-
-  if(euser || guser) {
-    console.log(euser || guser);
+  if (eloading || gloading) {
+    return <Loading></Loading>;
   }
 
+  if (euser || guser) {
+    navigate(from, { replace: true });
+  }
 
   return (
     <div className="flex py-20  mt-20 justify-center items-center hero bg-blue-400">
@@ -146,7 +146,7 @@ const [
             class="btn btn-warning mx-auto  text-2xl"
           >
             {/* <i class="fa-brands fa-google"></i> */}
-           Google
+            Google
           </button>
           <div>
             <label className="label">

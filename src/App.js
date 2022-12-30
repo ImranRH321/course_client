@@ -13,6 +13,7 @@ import Products from './Pages/Home/Products/Products/Products';
 import Login from './Pages/Login_impormation/Login/Login';
 import Register from './Pages/Login_impormation/Register/Register';
 import NotFound from './Pages/NotFound/NotFound';
+import PribateRoute from './Pages/PribateRoute/PribateRoute';
 import Footer from './Pages/Sheard/Footer/Footer';
 
 const App = () => {
@@ -23,8 +24,12 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/products/:productId" element={<ProductDetails />} />
+       {/* el tag under route  pribate producted routed exist user accptes*/}
+        <Route path="/products/:productId" element={<PribateRoute>
+          <ProductDetails />
+        </PribateRoute>} />
         <Route path="/productDetails/productOrderForm" element={<ProductOrderForm />} />
+        {/* single route path fixed and anather multiply route system  */}
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="order" element={<Order />} />
           <Route path="manageOrder" element={<ManageOrder/>} />

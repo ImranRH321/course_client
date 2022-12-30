@@ -7,7 +7,7 @@ import {
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../firebase/firebase.init";
 import Loading from "../../Sheard/Footer/Loading";
 
@@ -27,6 +27,8 @@ const Register = () => {
     reset,
     formState: { errors }, 
   } = useForm();
+
+  let navigate = useNavigate();
 
   const onSubmit = async (data) => {
     //  em / pw
@@ -53,7 +55,7 @@ const Register = () => {
   }
 
   if (cuser || guser) {
-    console.log(cuser || guser);
+    navigate('/')
   }
 
   return (
