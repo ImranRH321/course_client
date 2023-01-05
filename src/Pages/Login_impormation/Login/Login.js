@@ -18,7 +18,6 @@ const Login = () => {
   // hook form data
   // token
 
-
   const {
     register,
     handleSubmit,
@@ -26,35 +25,33 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-
-  const [token ] = useToken( sUser || gUser)
-
-
+  const [token] = useToken(sUser || gUser);
 
   //  pribate route
   let navigate = useNavigate();
   let location = useLocation();
   let from = location.state?.from?.pathname || "/";
+
   // hook form submit
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
-
   };
+
+
+
+  console.log(token);
+
+
+  if (token) {
+    navigate(from, { replace: true });
+  }
+
 
   if (sLoading || gLoading || sLoading) {
     return <Loading></Loading>;
   }
 
-
-if (sUser || gUser) {
-      navigate(from, { replace: true });
-    }
-  
-  // ---> Jado
-  // if (token) {
-  //   navigate(from, { replace: true });
-  // }
-
+ 
 
   let setFireError;
 
@@ -65,7 +62,6 @@ if (sUser || gUser) {
       </p>
     );
   }
-
 
   // console.log(sError);
 

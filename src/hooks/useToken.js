@@ -16,8 +16,11 @@ const useToken = (user) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          const accessToken = data.token;
-          localStorage.setItem("accessToken", accessToken);
+          if (data) {
+            const accessToken = data.token;
+            setToken(accessToken)
+            localStorage.setItem("accessToken", accessToken);
+          }
         });
     }
   }, [email]);

@@ -39,9 +39,6 @@ const Register = () => {
     await createUserWithEmailAndPassword(data.email, data.password);
     // up df
     const success = await updateProfile({ displayName: data.name });
-    if (success) {
-      alert("Updated profile");
-    }
   };
 
   if (rLoading || gLoading || updating) {
@@ -58,9 +55,10 @@ const Register = () => {
     );
   }
 
-  if (rUser || gUser) {
+  if (token) {
     navigate("/");
   }
+
 
   return (
     <div className="flex py-20  mt-20 justify-center items-center hero bg-green-500">

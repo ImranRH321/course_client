@@ -45,14 +45,14 @@ const ProductOrderForm = () => {
       category: products?.category,
     };
  
-    console.log(products);
+    console.log(userBookingData);
 
     fetch("http://localhost:5000/orderBook", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",   
       },
-      body: JSON.stringify({ userBookingData }),
+      body: JSON.stringify(userBookingData ),
     })
       .then((response) => response.json())
       .then((data) => {
