@@ -6,14 +6,25 @@ const ProductDetails = () => {
   const { productId } = useParams({}); // user details single id
   const [productDetails, setProductDetails] = useState({});
 
+  // useEffect(() => {
+  //   fetch("/products.json")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       const singleProduct = data.filter((el) => el._id == productId);
+  //       setProductDetails(singleProduct[0]);
+  //     });
+  // }, []);
+
+
   useEffect(() => {
-    fetch("/products.json")
+    fetch(`http://localhost:5000/product/${productId}`)
       .then((res) => res.json())
       .then((data) => {
-        const singleProduct = data.filter((el) => el._id == productId);
-        setProductDetails(singleProduct[0]);
+        // console.log('detils', data);
+        setProductDetails(data) 
       });
-  }, []);
+  }, [productId]);
+
 
   const {
     available,
@@ -30,6 +41,9 @@ const ProductDetails = () => {
     title,
     _id,
   } = productDetails;
+
+
+
 
   return (
     <div className="grid md:grid-cols-2 gap-4">
@@ -64,7 +78,8 @@ const ProductDetails = () => {
             {/* quanity  increament and decrement  */}
             <div>
               <Link
-                to="/productDetails/productOrderForm"
+               
+                to={`/productDetails/productOrderForm/${_id}`}
                 className="btn btn-primary btn-md"
               >
                 Order

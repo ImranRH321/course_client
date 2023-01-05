@@ -15,6 +15,11 @@ import Register from './Pages/Login_impormation/Register/Register';
 import NotFound from './Pages/NotFound/NotFound';
 import PribateRoute from './Pages/PribateRoute/PribateRoute';
 import Footer from './Pages/Sheard/Footer/Footer';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Users from './Pages/Dashboard/Users/Users';
+
+
 
 const App = () => {
   return (
@@ -28,10 +33,11 @@ const App = () => {
         <Route path="/products/:productId" element={<PribateRoute>
           <ProductDetails />
         </PribateRoute>} />
-        <Route path="/productDetails/productOrderForm" element={<ProductOrderForm />} />
+        <Route path="/productDetails/productOrderForm/:id" element={<ProductOrderForm />} />
         {/* single route path fixed and anather multiply route system  */}
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="order" element={<Order />} />
+          <Route path="user" element={<Users/>} />
           <Route path="manageOrder" element={<ManageOrder/>} />
           <Route path="addProduct" element={<AddProducts/>} />
         </Route>
@@ -41,6 +47,7 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer></Footer>
+      <ToastContainer/>
     </div>
   );
 };

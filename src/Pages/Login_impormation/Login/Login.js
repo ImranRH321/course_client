@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase/firebase.init";
@@ -7,20 +7,29 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import Loading from "../../Sheard/Footer/Loading";
+import useToken from "../../../hooks/useToken";
 
 const Login = () => {
   // google
-  const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   // login email vs password
-  const [signInWithEmailAndPassword, euser, eloading, eerror] =
+  const [signInWithEmailAndPassword, sUser, sLoading, sError] =
     useSignInWithEmailAndPassword(auth);
   // hook form data
+  // token
+
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
+
+
+  const [token ] = useToken( sUser || gUser)
+
+
 
   //  pribate route
   let navigate = useNavigate();
@@ -29,16 +38,36 @@ const Login = () => {
   // hook form submit
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
-    console.log(data);
+
   };
 
-  if (eloading || gloading) {
+  if (sLoading || gLoading || sLoading) {
     return <Loading></Loading>;
   }
 
-  if (euser || guser) {
-    navigate(from, { replace: true });
+
+if (sUser || gUser) {
+      navigate(from, { replace: true });
+    }
+  
+  // ---> Jado
+  // if (token) {
+  //   navigate(from, { replace: true });
+  // }
+
+
+  let setFireError;
+
+  if (gError || sError) {
+    setFireError = (
+      <p className="text-red-700 font-[propine]">
+        {gError?.message || sError?.message}
+      </p>
+    );
   }
+
+
+  // console.log(sError);
 
   return (
     <div className="flex py-20  mt-20 justify-center items-center hero bg-blue-400">
@@ -122,7 +151,7 @@ const Login = () => {
                 )}
               </label>
             </div>
-            {/* {setError} */}
+            {setFireError}
             <input
               className="rounded py-2 cursor-pointer shadow mt-2 w-full text-2xl max-w-xs bg-blue-600 hover:bg-blue-700 capitalize text-white"
               type="submit"

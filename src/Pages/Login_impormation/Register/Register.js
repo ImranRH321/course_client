@@ -9,30 +9,34 @@ import {
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../firebase/firebase.init";
+import useToken from "../../../hooks/useToken";
 import Loading from "../../Sheard/Footer/Loading";
 
 const Register = () => {
   // google
-  const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   //  email password flied
-  const [createUserWithEmailAndPassword, cuser, cloading, cerror] =
+  const [createUserWithEmailAndPassword, rUser, rLoading, rError] =
     useCreateUserWithEmailAndPassword(auth);
 
   // update frofile
-  const [updateProfile, updating, error] = useUpdateProfile(auth);
+  const [updateProfile, updating, uError] = useUpdateProfile(auth);
+
+  // token
+  const [token] = useToken(rUser || gUser);
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors }, 
+    formState: { errors },
   } = useForm();
 
   let navigate = useNavigate();
 
   const onSubmit = async (data) => {
     //  em / pw
-    createUserWithEmailAndPassword(data.email, data.password);
+    await createUserWithEmailAndPassword(data.email, data.password);
     // up df
     const success = await updateProfile({ displayName: data.name });
     if (success) {
@@ -40,22 +44,22 @@ const Register = () => {
     }
   };
 
-  if (cloading || gloading) {
+  if (rLoading || gLoading || updating) {
     return <Loading></Loading>;
   }
 
   let googleError;
 
-  if (gerror || cerror) {
+  if (gError || rError || uError) {
     googleError = (
       <p className="text-red-700 font-[propine]">
-        {gerror?.message || cerror?.message}
+        {gError?.message || rError?.message || rError?.message}
       </p>
     );
   }
 
-  if (cuser || guser) {
-    navigate('/')
+  if (rUser || gUser) {
+    navigate("/");
   }
 
   return (

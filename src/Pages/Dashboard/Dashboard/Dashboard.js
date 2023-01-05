@@ -1,26 +1,61 @@
-import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import React from "react";
+import { Link, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
+  // AKAS ER UPOR TAKE BRISTI PORE OUTLET
+  return (
 
-
-    // AKAS ER UPOR TAKE BRISTI PORE OUTLET  
-    return (
-        <div>
-            <h2>This is Dashboard !@ </h2>
-            <div className='grid md:grid-cols-2'>
-                <nav className='flex flex-col gap-4 border '>
-                    <p className='border w-1/4'><Link to="order" className='btn  btn-success hover:green-700 w-full'>Order</Link></p>
-                    <p className='border w-1/4'><Link to="manageOrder" className='btn  btn-success hover:green-700 w-full'>manageOrder</Link></p>
-                    <p className='border w-1/4'><Link to="addProduct" className='btn  btn-success hover:green-700 w-full'>AddProduct</Link></p>
-                </nav>
-                <div className='border'>
-                    <Outlet />
-                </div>
-            </div>
-
+      <div className="drawer drawer-mobile border">
+        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content ">
+          {/* <!-- Page content here --> */}
+          <label
+            htmlFor="my-drawer-2"
+            className="btn btn-primary drawer-button lg:hidden"
+          >
+            Open drawer
+          </label>
+          <Outlet />
         </div>
-    );
+        <div className="drawer-side">
+          <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+          <ul className="menu p-4 w-80 bg-base-400 text-base-content">
+            <li className="border m-3">
+              <Link
+                to="order"
+                className="btn  btn-success hover:green-700 w-full"
+              >
+                Order
+              </Link>
+            </li>
+            <li className="border m-3">
+              <Link
+                to="manageOrder"
+                className="btn  btn-success hover:green-700 w-full"
+              >
+                manageOrder
+              </Link>
+            </li>
+            <li className="border m-3">
+              <Link
+                to="user"
+                className="btn  btn-success hover:green-700 w-full"
+              >
+                Users
+              </Link>
+            </li>
+            <li className="border m-3">
+              <Link
+                to="addProduct"
+                className="btn  btn-success hover:green-700 w-full"
+              >
+                AddProduct
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+  );
 };
 
-export default Dashboard; 
+export default Dashboard;

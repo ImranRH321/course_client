@@ -3,7 +3,7 @@ import React from "react";
 
 const Filtering = ({ setSearch, setValue }) => {
   return (
-    <div>
+    <div className="px-5 fixed ">
       <input
         onChange={(e) => setSearch(e.target.value)}
         type="text"
